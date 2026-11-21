@@ -17,6 +17,8 @@ name: sarplus test and package
 
 on:
   push:
+    branches: [main]
+    tags: ['**']
     paths:
       - contrib/sarplus/python/**
       - contrib/sarplus/scala/**
