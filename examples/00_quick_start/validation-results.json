@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-22",
+  "environment": "Ubuntu 22.04 WSL / Python 3.10.12 / OpenJDK 11",
+  "timing": "Kernel startup, notebook execution and shutdown; excludes environment installation. Data caches may be warm. Not a speed benchmark.",
+  "results": [
+    {
+      "notebook": "sar_movielens",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "metrics": {
+        "map": 0.10695857389687874,
+        "ndcg": 0.3795334514937595,
+        "precision": 0.3310710498409332,
+        "recall": 0.17683684715427114,
+        "train_time": 0.3379534990000366,
+        "test_time": 0.15016550000001416
+      },
+      "seconds": 9.19,
+      "source_sha256_lf": "070773756608cbb73b5e327f63a810a0cb7e1108534eed853d532095011e416a"
+    },
+    {
+      "notebook": "als_movielens",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "metrics": {
+        "map": 0.020023556534747255,
+        "ndcg": 0.051726519147382785,
+        "precision": 0.05127388535031843,
+        "recall": 0.018840283525491282,
+        "rmse": 0.9674342218475206,
+        "mae": 0.7533395123214025,
+        "exp_var": 0.26591619880670303,
+        "rsquared": 0.25953227528759615,
+        "train_time": 4.913416057999996,
+        "test_time": 2.888436167000009
+      },
+      "seconds": 31.38,
+      "source_sha256_lf": "e3c44e4e81d6ed687902dbdd4e0dcf2d23b8116f1070a2a27b4fb5fc766815a5"
+    },
+    {
+      "notebook": "lightgbm_tinycriteo",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "metrics": {
+        "auc_basic": 0.8846884688468846,
+        "logloss_basic": 0.4587008223997047,
+        "auc_opt": 0.913991399139914,
+        "logloss_opt": 0.5342279828448477
+      },
+      "seconds": 45.02,
+      "source_sha256_lf": "bbd0edc8ce7791da95f6e05d8890a3a877570a4f6113808e03aa86291f5ac6d2"
+    },
+    {
+      "notebook": "cpu_models_offline",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "metrics": {
+        "svd_rmse_synthetic": 1.4320455286439933,
+        "bpr_unseen_scores": 900,
+        "tfidf_recommendations": 12
+      },
+      "seconds": 6.97,
+      "source_sha256_lf": "e245774ef9d5141fb178fadfda307161df9e656bf468f62bc89288e646ce9f19"
+    }
+  ]
+}

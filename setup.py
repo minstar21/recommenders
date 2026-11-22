@@ -28,7 +28,7 @@ if HASH is not None:
 
 install_requires = [
     "category-encoders>=2.6.0,<3",  # requires packaging
-    "cornac>=1.15.2,<3",  # requires packaging, tqdm
+    "cornac>=1.15.2,<2.3",  # 2.3 Linux wheels require a newer libstdc++ than Ubuntu 22.04
     "hyperopt>=0.2.7,<1",
     "lightgbm>=4.0.0,<5",
     "locust>=2.12.2,<3",  # requires jinja2
@@ -59,7 +59,7 @@ extras_require = {
     ],
     "spark": [
         "pyarrow>=10.0.1",
-        "pyspark>=3.3.0,<=4",
+        "pyspark>=3.3.0,<4",
     ],
     "dev": [
         "black>=23.3.0",
@@ -119,10 +119,10 @@ setup(
     "machine learning python spark gpu",
     install_requires=install_requires,
     package_dir={"recommenders": "recommenders"},
-    python_requires=">=3.6",
+    python_requires=">=3.8,<3.12",
     packages=find_packages(
         where=".",
         exclude=["contrib", "docs", "examples", "scenarios", "tests", "tools"],
     ),
-    setup_requires=["numpy>=1.19"],
+    setup_requires=["numpy>=1.19,<2"],
 )

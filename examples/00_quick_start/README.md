@@ -1,5 +1,10 @@
 # Quick Start
 
+For a first local installation, start with the [validated CPU/Spark paths](VALIDATION.md)
+and [offline SVD, BPR and TF-IDF notebook](cpu_models_offline.ipynb).
+The table below lists the broader upstream examples; their presence does not
+mean they were all executed in this fork's validation.
+
 In this directory, notebooks are provided to perform a quick demonstration of different algorithms such as Alternating Least Squares ([ALS](https://spark.apache.org/docs/latest/api/python/_modules/pyspark/ml/recommendation.html#ALS)) or Simple Algorithm for Recommendation ([SAR](https://github.com/Microsoft/Product-Recommendations/blob/master/doc/sar.md)). The notebooks show how to establish an end-to-end recommendation pipeline that consists of data preparation, model building, and model evaluation by using the utility functions ([recommenders](../../recommenders)).
 
 | Notebook | Dataset | Environment | Description |
