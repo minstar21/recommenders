@@ -52,6 +52,8 @@ sphinx:
   config:
     autoapi_dirs: ["../recommenders"]
     autoapi_generate_api_docs: false
+    autoapi_options: [members, undoc-members, show-inheritance, show-module-summary]
+    napoleon_use_ivar: true
 
 
 

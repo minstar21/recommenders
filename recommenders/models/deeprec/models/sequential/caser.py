@@ -23,7 +23,7 @@ class CaserModel(SequentialBaseModel):
         """Initialization of variables for caser
 
         Args:
-            hparams (HParams): A HParams object, hold the entire set of hyperparameters.
+            hparams (:class:`~recommenders.models.deeprec.deeprec_utils.HParams`): A HParams object, hold the entire set of hyperparameters.
             iterator_creator (object): An iterator to load the data.
         """
         self.hparams = hparams

@@ -6,6 +6,14 @@ from setuptools import setup
 from setuptools.extension import Extension
 
 
+# A source checkout keeps the authoritative version next to python/ and scala/.
+# Source distributions carry the copied file inside the Python package.
+package_version = Path(__file__).resolve().parent / "pysarplus" / "VERSION"
+source_version = Path(__file__).resolve().parent.parent / "VERSION"
+if source_version.exists():
+    package_version.write_text(source_version.read_text().strip() + "\n")
+
+
 class get_pybind_include(object):
     def __init__(self, user=False):
         self.user = user
@@ -50,7 +58,7 @@ setup(
     setup_requires=["pytest-runner"],
     install_requires=DEPENDENCIES,
     tests_require=["pytest"],
-    python_requires=">=3.6,<3.12",
+    python_requires=">=3.8,<3.12",
     packages=["pysarplus"],
     package_data={"": ["VERSION"]},
     ext_modules=[

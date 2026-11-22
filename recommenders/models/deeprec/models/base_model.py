@@ -22,7 +22,7 @@ class BaseModel:
         parameter set.
 
         Args:
-            hparams (object): An `HParams` object, holds the entire set of hyperparameters.
+            hparams (object): An :class:`~recommenders.models.deeprec.deeprec_utils.HParams` object, holds the entire set of hyperparameters.
             iterator_creator (object): An iterator to load the data.
             graph (object): An optional graph.
             seed (int): Random seed.
