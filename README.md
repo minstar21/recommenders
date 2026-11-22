@@ -34,6 +34,11 @@ fork's local validation, not the upstream project's full support matrix.
 | Wide & Deep | [Wide & Deep quickstart](examples/00_quick_start/wide_deep_movielens.ipynb) | MovieLens 100K, 500 steps | Passed, including exported-model inference |
 | SASRec | [Sequential quickstart](examples/00_quick_start/sasrec_amazon.ipynb) | MovieLens 100K sequences, 5 epochs; separate synthetic mode | Passed, TensorFlow CPU 2.15.1 |
 | xDeepFM | [xDeepFM quickstart](examples/00_quick_start/xdeepfm_criteo.ipynb) | Synthetic click data, 10 epochs | Passed; actual Criteo not validated |
+| DKN | [DKN quickstart](examples/00_quick_start/dkn_MIND.ipynb) | Synthetic news impressions, 1 epoch | Passed on TensorFlow CPU; actual MIND unverified |
+| LSTUR | [LSTUR quickstart](examples/00_quick_start/lstur_MIND.ipynb) | Synthetic news impressions, 1 epoch | Passed on TensorFlow CPU; actual MIND unverified |
+| NAML | [NAML quickstart](examples/00_quick_start/naml_MIND.ipynb) | Synthetic news impressions, 1 epoch | Passed on TensorFlow CPU; actual MIND unverified |
+| NPA | [NPA quickstart](examples/00_quick_start/npa_MIND.ipynb) | Synthetic news impressions, 1 epoch | Passed on TensorFlow CPU; actual MIND unverified |
+| NRMS | [NRMS quickstart](examples/00_quick_start/nrms_MIND.ipynb) | Synthetic news impressions, 1 epoch | Passed on TensorFlow CPU; actual MIND unverified |
 
 From a clone of `minstar21/recommenders`, run:
 
@@ -59,6 +64,8 @@ GPUs. NCF defaults to a 5-epoch first run; `NCF_EPOCHS=50` restores the original
 training budget. The documented validation covers 5 epochs.
 Wide & Deep, SASRec and xDeepFM use the same TensorFlow CPU installation profile;
 see [their execution, data modes and cleanup results](examples/00_quick_start/ADVANCED_CPU_VALIDATION.md).
+The five news quickstarts use the same CPU profile with offline synthetic inputs;
+see [news installation, prepared-input support and real MIND access limits](examples/00_quick_start/NEWS_CPU_VALIDATION.md).
 
 SAR and ALS need network access to GroupLens for MovieLens. The Criteo sample
 URL currently redirects to a blog: the LightGBM notebook labels its synthetic
