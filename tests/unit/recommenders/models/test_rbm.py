@@ -187,6 +187,15 @@ def test_save_load(init_rbm, affinity_matrix):
     # load the pretrained model
     saved_model.load()
 
+    # A checkpoint must be usable for inference without calling fit again.
+    predictions = saved_model.predict(Xtr[:2])
+    assert predictions.shape == Xtr[:2].shape
+    assert np.isfinite(predictions).all()
+    recommendations = saved_model.recommend_k_items(Xtr[:2], top_k=2)
+    assert recommendations.shape == Xtr[:2].shape
+    assert np.isfinite(recommendations).all()
+    assert (recommendations[Xtr[:2] != 0] == 0).all()
+
     # list of unique rating values
     assert np.array_equal(saved_model.possible_ratings, original_model.possible_ratings)
     # number of visible units

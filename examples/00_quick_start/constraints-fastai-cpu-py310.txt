@@ -1,0 +1,6 @@
+-c constraints-verified-py310.txt
+torch==2.5.1+cpu
+torchvision==0.20.1+cpu
+fastai==2.8.12
+fastcore==2.2.45
+fasttransform==0.0.5

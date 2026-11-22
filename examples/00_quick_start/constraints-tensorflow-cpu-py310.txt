@@ -1,0 +1,5 @@
+-c constraints-verified-py310.txt
+tensorflow-cpu==2.15.1
+keras==2.15.0
+tf-slim==1.1.0
+tensorflow-estimator==2.15.0

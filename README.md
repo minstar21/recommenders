@@ -28,6 +28,9 @@ fork's local validation, not the upstream project's full support matrix.
 | ALS | [ALS quickstart](examples/00_quick_start/als_movielens.ipynb) | MovieLens 100K download | Passed, local Spark 3.5.9 |
 | LightGBM | [Click prediction](examples/00_quick_start/lightgbm_tinycriteo.ipynb) | Seeded synthetic, 2,000 rows | Passed, including save/reload equality |
 | Surprise SVD, Cornac BPR, TF-IDF | [Offline CPU models](examples/00_quick_start/cpu_models_offline.ipynb) | Seeded synthetic interactions and short texts | Passed |
+| NCF | [NCF quickstart](examples/00_quick_start/ncf_movielens.ipynb) | MovieLens 100K, 5 epochs | Passed, TensorFlow CPU 2.15.1 |
+| RBM | [RBM quickstart](examples/00_quick_start/rbm_movielens.ipynb) | MovieLens 100K, 30 epochs | Passed, TensorFlow CPU 2.15.1 |
+| FastAI | [FastAI quickstart](examples/00_quick_start/fastai_movielens.ipynb) | MovieLens 100K, 5 epochs | Passed, PyTorch 2.5.1+cpu |
 
 From a clone of `minstar21/recommenders`, run:
 
@@ -46,11 +49,17 @@ source notebooks stay unchanged. For interactive use, run `jupyter notebook`
 from the same environment. Install a matching ipykernel if selecting this
 environment from a separately installed Jupyter application.
 
+For NCF/RBM or FastAI, follow the separate
+[CPU neural installation profiles](examples/00_quick_start/NEURAL_CPU_VALIDATION.md).
+They install CPU framework wheels, run with `--cpu-only`, and record zero visible
+GPUs. NCF defaults to a 5-epoch first run; `NCF_EPOCHS=50` restores the original
+training budget. The documented validation covers 5 epochs.
+
 SAR and ALS need network access to GroupLens for MovieLens. The Criteo sample
 URL currently redirects to a blog: the LightGBM notebook labels its synthetic
 mode and accepts an independently obtained local Criteo file explicitly.
 Synthetic metrics verify execution and are not Criteo performance estimates.
-NCF, FastAI and other TensorFlow/PyTorch notebooks, GPU execution, cloud services,
+Other TensorFlow/PyTorch notebooks, GPU execution, cloud services,
 Windows-native Spark and Python versions other than 3.10 were not validated in
 this run. [Detailed reproduction and results](examples/00_quick_start/VALIDATION.md).
 

@@ -24,6 +24,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument(
+        "--cpu-only",
+        action="store_true",
+        help="Hide CUDA devices from notebook kernels",
+    )
+    parser.add_argument(
         "--notebooks",
         nargs="+",
         default=[
@@ -41,6 +46,10 @@ def main():
     os.environ.setdefault("PYSPARK_PYTHON", sys.executable)
     os.environ.setdefault("SPARK_LOCAL_IP", "127.0.0.1")
     os.environ.setdefault("OMP_NUM_THREADS", "2")
+    if args.cpu_only:
+        os.environ["CUDA_VISIBLE_DEVICES"] = ""
+        os.environ.setdefault("TF_NUM_INTRAOP_THREADS", "2")
+        os.environ.setdefault("TF_NUM_INTEROP_THREADS", "2")
     with TemporaryDirectory() as kernels:
         spec = Path(kernels) / "minstar-validation"
         spec.mkdir()

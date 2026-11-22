@@ -71,6 +71,14 @@ extras_require = {
 # For the brave of heart
 extras_require["all"] = list(set(sum([*extras_require.values()], [])))
 
+# CPU neural profiles are separate from the existing GPU/all installation.
+extras_require["cpu-tensorflow"] = [
+    "tensorflow-cpu>=2.15,<2.16",
+    "tf-slim>=1.1,<2",
+]
+# Install the desired PyTorch CPU/CUDA wheel before selecting this extra.
+extras_require["fastai"] = ["fastai>=2.8,<2.9"]
+
 # The following dependencies need additional testing
 extras_require["experimental"] = [
     # xlearn requires cmake to be pre-installed

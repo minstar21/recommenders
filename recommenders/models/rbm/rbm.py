@@ -629,8 +629,9 @@ class RBM:
         then item2 will be recommended.
 
         Args:
-            x (numpy.ndarray, int32): input user/affinity matrix. Note that this can be a single vector, i.e. the ratings
-            of a single user.
+            x (numpy.ndarray, int32): Observed user/affinity history. Nonzero entries
+                are excluded when remove_seen=True. For held-out evaluation pass
+                training history here and use held-out ratings only as targets.
             top_k (scalar, int32): the number of items to recommend.
 
         Returns:
@@ -654,10 +655,12 @@ class RBM:
         log.info("Extracting top %i elements" % top_k)
 
         if remove_seen:
-            # if true, it removes items from the train set by setting them to zero
-            vp[self.seen_mask] = 0
-            pv[self.seen_mask] = 0
-            score[self.seen_mask] = 0
+            # Use the supplied users' history, including after checkpoint reload
+            # and when predicting fewer users than were in the training matrix.
+            seen_mask = x != 0
+            vp[seen_mask] = 0
+            pv[seen_mask] = 0
+            score[seen_mask] = 0
 
         top_items = np.argpartition(-score, range(top_k), axis=1)[
             :, :top_k
@@ -732,5 +735,8 @@ class RBM:
         dir_name, file_name = f_path.parent, f_path.name
 
         # load pre-trained model
-        saver = tf.compat.v1.train.Saver()
-        saver.restore(self.sess, os.path.join(dir_name, file_name))
+        with self.sess.graph.as_default():
+            saver = tf.compat.v1.train.Saver()
+            saver.restore(self.sess, os.path.join(dir_name, file_name))
+            # Checkpoints restore variables, not static lookup resources.
+            self.sess.run(tf.compat.v1.tables_initializer())
