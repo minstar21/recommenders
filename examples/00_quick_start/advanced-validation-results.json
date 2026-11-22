@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-22",
+  "environment": "Fresh Ubuntu22.04 WSL / Python3.10.12 / TensorFlow CPU2.15.1; CUDA hidden",
+  "visible_gpus": 0,
+  "timing": "Seconds include kernel and notebook execution, exclude installation; caches may be warm; not a benchmark",
+  "unit_tests": {
+    "passed": 30
+  },
+  "invalid_local_sequence_cases_rejected": 2,
+  "results": [
+    {
+      "notebook": "wide_deep_movielens",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "aa52032e2feefe6ad2f007f1776f69210977f3e5e123db501a211038ab364d60",
+      "metrics": {
+        "rmse": 1.0008688706590374,
+        "mae": 0.8094334705066681,
+        "ndcg_at_k": 0.1614177940728066,
+        "precision_at_k": 0.1515923566878981,
+        "saved_model_independent_prediction_passed": true
+      },
+      "seconds": 49.59,
+      "data_source": "MovieLens 100K",
+      "training_steps": 500
+    },
+    {
+      "notebook": "sasrec_amazon",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "950f7ffe33343fe240c22b9dffb0d3c8a7ace43532e2372f4ccbca03f08f948c",
+      "metrics": {
+        "ndcg@10": 0.21504454238567877,
+        "Hit@10": 0.4093319194061506,
+        "epochs": 5,
+        "users": 943,
+        "items": 1682
+      },
+      "seconds": 30.95,
+      "data_source": "MovieLens 100K sequences",
+      "epochs": 5
+    },
+    {
+      "notebook": "sasrec_amazon",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "950f7ffe33343fe240c22b9dffb0d3c8a7ace43532e2372f4ccbca03f08f948c",
+      "metrics": {
+        "ndcg@10": 0.024590117036919226,
+        "Hit@10": 0.0625,
+        "epochs": 5,
+        "users": 32,
+        "items": 120
+      },
+      "seconds": 8.73,
+      "data_source": "synthetic 32 users / 120 items",
+      "epochs": 5
+    },
+    {
+      "notebook": "xdeepfm_criteo",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "f04b56b5428ba386e2ffd19685cf45f165e932e9c5b3c658db846e416db90b9e",
+      "metrics": {
+        "auc": 0.8998,
+        "logloss": 0.3609,
+        "epochs": 10
+      },
+      "seconds": 11.48,
+      "data_source": "synthetic 2000 clicks / 39 fields",
+      "epochs": 10
+    }
+  ]
+}
