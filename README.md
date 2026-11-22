@@ -15,12 +15,51 @@ Licensed under the MIT License.
 
 <br>
 
-## What's New (May, 2024)
+## Verified first run in this fork
+
+Start with Ubuntu 22.04 (native or WSL), Python **3.10**, and JDK **11** for ALS.
+The following paths were executed from a separate virtual environment, including
+installation, fitting, prediction and evaluation. This table describes this
+fork's local validation, not the upstream project's full support matrix.
+
+| Models | Entry notebook | Data | Local execution |
+| --- | --- | --- | --- |
+| SAR | [SAR quickstart](examples/00_quick_start/sar_movielens.ipynb) | MovieLens 100K download | Passed |
+| ALS | [ALS quickstart](examples/00_quick_start/als_movielens.ipynb) | MovieLens 100K download | Passed, local Spark 3.5.9 |
+| LightGBM | [Click prediction](examples/00_quick_start/lightgbm_tinycriteo.ipynb) | Seeded synthetic, 2,000 rows | Passed, including save/reload equality |
+| Surprise SVD, Cornac BPR, TF-IDF | [Offline CPU models](examples/00_quick_start/cpu_models_offline.ipynb) | Seeded synthetic interactions and short texts | Passed |
+
+From a clone of `minstar21/recommenders`, run:
+
+```bash
+python3.10 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install '.[spark]' nbclient ipykernel -c examples/00_quick_start/constraints-verified-py310.txt
+python -m pip check
+python tools/validate_quickstarts.py --output "$HOME/recommenders-first-run"
+```
+
+The output directory must be new. It receives executed notebook copies, measured
+times, finite evaluation metrics, and failure traces in `results.json`; the
+source notebooks stay unchanged. For interactive use, run `jupyter notebook`
+from the same environment. Install a matching ipykernel if selecting this
+environment from a separately installed Jupyter application.
+
+SAR and ALS need network access to GroupLens for MovieLens. The Criteo sample
+URL currently redirects to a blog: the LightGBM notebook labels its synthetic
+mode and accepts an independently obtained local Criteo file explicitly.
+Synthetic metrics verify execution and are not Criteo performance estimates.
+NCF, FastAI and other TensorFlow/PyTorch notebooks, GPU execution, cloud services,
+Windows-native Spark and Python versions other than 3.10 were not validated in
+this run. [Detailed reproduction and results](examples/00_quick_start/VALIDATION.md).
 
 Fork maintenance: [SARPlus local build and offline regression tests](contrib/sarplus/python/README.md#build-and-test-locally)
 now run without the retired sample-data host. API documentation builds with
 `python -m pip install -r docs/requirements-doc.txt` and `jupyter-book build docs`;
 training runtimes are not required to extract API documentation.
+
+## What's New (May, 2024)
 
 We have a new release [Recommenders 1.2.0](https://github.com/recommenders-team/recommenders/releases/tag/1.2.0)!
 

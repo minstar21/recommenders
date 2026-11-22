@@ -1,0 +1,13 @@
+# Validated Ubuntu 22.04 / Python 3.10 versions. Use with pip -c, not pip -r.
+numpy==1.26.4
+pandas==2.3.3
+scipy==1.13.1
+pyspark==3.5.9
+cornac==2.2.2
+scikit-surprise==1.1.5
+scikit-learn==1.7.2
+lightgbm==4.7.0
+category-encoders==2.8.1
+nbclient==0.11.0
+ipykernel==7.3.0
+pandera==0.36.0
