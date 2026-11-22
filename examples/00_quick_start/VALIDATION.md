@@ -65,7 +65,8 @@ The existing evaluation, Surprise and Cornac unit suites passed **36 tests**
 This run validates these six models in this Python 3.10 Linux environment.
 The original TF-IDF CORD-19 notebook needs external data and SciBERT; the new
 offline text notebook uses `tokenization_method="none"`. No cloud credentials,
-GPU or paid API are used. NCF, FastAI, other TensorFlow/PyTorch notebooks,
+GPU or paid API are used. NCF, RBM and FastAI now have separate
+[validated CPU profiles](NEURAL_CPU_VALIDATION.md). Other TensorFlow/PyTorch notebooks,
 Databricks/Synapse, Windows-native Spark and other Python versions have not
 been executed in this run. MovieLens download availability remains external.
 No confirmation GitHub Actions were started.

@@ -1,0 +1,69 @@
+{
+  "date": "2026-11-22",
+  "environment": "Separate fresh Ubuntu 22.04 WSL / Python 3.10.12 venvs; CPU framework wheels, CUDA devices hidden",
+  "frameworks": {
+    "tensorflow-cpu": "2.15.1",
+    "keras": "2.15.0",
+    "tf-slim": "1.1.0",
+    "fastai": "2.8.12",
+    "torch": "2.5.1+cpu",
+    "torchvision": "0.20.1+cpu"
+  },
+  "timing": "Notebook kernel startup, cells and shutdown; excludes installation. MovieLens caches may be warm. Not a comparative benchmark.",
+  "visible_gpus": 0,
+  "results": [
+    {
+      "notebook": "ncf_movielens",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "90954fa69104996f391effa6b679d1ec6e8f4ec325a6d68097e30345acc6b05f",
+      "metrics": {
+        "map": 0.04525880250866415,
+        "ndcg": 0.18588940752134364,
+        "precision": 0.1664899257688229,
+        "recall": 0.0941028838442611,
+        "train_time": 12.894160959000033,
+        "test_time": 5.176056281000001,
+        "epochs": 5,
+        "gpu_count": 0
+      },
+      "seconds": 64.85,
+      "epochs": 5
+    },
+    {
+      "notebook": "rbm_movielens",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "ddb0e8098b2aa30136821edd8e95f330c2245862a03bf5d562e49d4b51d9cee8",
+      "metrics": {
+        "map": 0.0010438443670150986,
+        "ndcg": 0.0038548555864210275,
+        "precision": 0.004241781548250266,
+        "recall": 0.000978166917623157
+      },
+      "seconds": 16.12,
+      "epochs": 30
+    },
+    {
+      "notebook": "fastai_movielens",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "6813997e01ec8113e2e821e72e56900001bd1e9844625db9a696e39c9256a07f",
+      "metrics": {
+        "map": 0.021465966078307322,
+        "ndcg": 0.13348262416939463,
+        "precision": 0.12322375397667021,
+        "recall": 0.0499212496233543,
+        "rmse": 0.9248321353164857,
+        "mae": 0.7321608700088273,
+        "exp_var": 0.3273273095213669,
+        "rsquared": 0.32599064663363553,
+        "train_time": 21.212699141,
+        "test_time": 1.9168337139999778
+      },
+      "seconds": 42.85,
+      "epochs": 5
+    }
+  ],
+  "rbm_core_source_sha256_lf": "3ba0cddb619d96819b976800e9832dabd43376026d65eb9c9269186631c5f681"
+}
