@@ -3,6 +3,7 @@
 For a first local installation, start with the [validated CPU/Spark paths](VALIDATION.md)
 and [offline SVD, BPR and TF-IDF notebook](cpu_models_offline.ipynb).
 NCF, RBM and FastAI have separate [CPU framework installation profiles](NEURAL_CPU_VALIDATION.md).
+Wide & Deep, SASRec and xDeepFM have [validated CPU examples with explicit data modes](ADVANCED_CPU_VALIDATION.md).
 The table below lists the broader upstream examples; their presence does not
 mean they were all executed in this fork's validation.
 
