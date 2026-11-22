@@ -169,17 +169,23 @@ jobs:
           stem=${files[0]%.pom}
           files+=("$stem.jar" "$stem-sources.jar" "$stem-javadoc.jar")
           for file in "${files[@]}"; do test -s "$file"; done
-          test -n "$GPG_KEY" || { echo "SARPLUS_GPG_PRI_KEY_ASC is required for release artifacts" >&2; exit 1; }
-          gpg --batch --import <<< "$GPG_KEY"
-          gpg --batch --list-secret-keys --with-colons | grep -q '^sec:'
-          for file in "${files[@]}"; do
-            gpg --batch --armor --detach-sign --output "$file.asc" "$file"
-          done
-          signed_files=("${files[@]}" "${files[@]/%/.asc}")
-          if [[ "$SPARK_VERSION" == '3.2.1' ]]; then
-            bundle="sarplus-spark-3.2-plus-bundle_2.12-${sarplus_version}.jar"
+          signed_files=("${files[@]}")
+          bundle_suffix=''
+          if [[ -n "$GPG_KEY" ]]; then
+            gpg --batch --import <<< "$GPG_KEY"
+            gpg --batch --list-secret-keys --with-colons | grep -q '^sec:'
+            for file in "${files[@]}"; do
+              gpg --batch --armor --detach-sign --output "$file.asc" "$file"
+            done
+            signed_files+=("${files[@]/%/.asc}")
           else
-            bundle="sarplus-${sarplus_version}-bundle_2.12-spark-${SPARK_VERSION}.jar"
+            echo "::warning::SARPLUS_GPG_PRI_KEY_ASC is unset; creating an unsigned CI artifact (not a signed release)."
+            bundle_suffix='-unsigned'
+          fi
+          if [[ "$SPARK_VERSION" == '3.2.1' ]]; then
+            bundle="sarplus-spark-3.2-plus-bundle_2.12-${sarplus_version}${bundle_suffix}.jar"
+          else
+            bundle="sarplus-${sarplus_version}-bundle_2.12-spark-${SPARK_VERSION}${bundle_suffix}.jar"
           fi
           jar cf "$bundle" "${signed_files[@]}"
           echo "sarplus_bundle=$bundle" >> "$GITHUB_ENV"
