@@ -84,7 +84,7 @@ profile passed. All checks ran locally; no confirmation Actions were started.
 | Notebook group | GPU requirement and execution scope | Data/service requirement |
 | --- | --- | --- |
 | NCF, RBM, FastAI | CPU execution verified; no GPU required for these validated profiles | Public MovieLens 100K download |
-| DKN, LSTUR, NAML, NPA, NRMS | Not executed here; no GPU-only requirement established by this validation | MIND and model-specific pretrained data |
+| DKN, LSTUR, NAML, NPA, NRMS | [CPU synthetic execution verified](NEWS_CPU_VALIDATION.md), one epoch; actual MIND unverified | Default offline fixtures; trusted prepared MIND inputs optional |
 | SASRec, xDeepFM, Wide & Deep | [CPU execution now validated](ADVANCED_CPU_VALIDATION.md); GPU not needed for those profiles | Actual MovieLens and explicitly synthetic data, as documented |
 | Other sequential models | Not executed here; no CPU support guarantee established | Model-specific Amazon data and compatible TensorFlow APIs |
 | AzureML / AzureML Designer notebooks | AzureML service access required for the workflow; GPU depends on selected compute | Azure account, workspace and compute configuration |

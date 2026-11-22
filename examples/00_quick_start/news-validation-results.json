@@ -1,0 +1,131 @@
+{
+  "date": "2026-11-22",
+  "platform": "Ubuntu 22.04 WSL, CPU only",
+  "fresh_virtualenv": true,
+  "installed_helper_matches_source": true,
+  "packages": {
+    "tensorflow-cpu": "2.15.1",
+    "keras": "2.15.0",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "pandas": "2.3.3",
+    "nbclient": "0.11.0",
+    "ipykernel": "7.3.0"
+  },
+  "pip_check": "No broken requirements found.",
+  "results": [
+    {
+      "notebook": "dkn_MIND",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "f1a9228a8c190e9ea7b19afc98f88029049f784b43948970e0a55f3acdbe18b8",
+      "metrics": {
+        "data_kind": "synthetic",
+        "gpu_count": 0,
+        "auc": 0.584,
+        "group_auc": 0.5625,
+        "ndcg@5": 0.6224,
+        "ndcg@10": 0.6224,
+        "mean_mrr": 0.499,
+        "reload_metrics_equal": true
+      },
+      "seconds": 7.03
+    },
+    {
+      "notebook": "lstur_MIND",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "5e665fe9e747aec5df9cdd99116f4e781460b64218de721faf23d0ce8f144eb0",
+      "metrics": {
+        "data_kind": "synthetic",
+        "gpu_count": 0,
+        "group_auc": 0.5,
+        "mean_mrr": 0.4844,
+        "ndcg@5": 0.6099,
+        "ndcg@10": 0.6099,
+        "reload_metrics_equal": true
+      },
+      "seconds": 6.62
+    },
+    {
+      "notebook": "naml_MIND",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "e36b3569cf9a80f8fbb8f8d78fc2619b67fff7202f71f9d55e6181d1d6d18460",
+      "metrics": {
+        "data_kind": "synthetic",
+        "gpu_count": 0,
+        "group_auc": 0.5156,
+        "mean_mrr": 0.4802,
+        "ndcg@5": 0.6072,
+        "ndcg@10": 0.6072,
+        "reload_metrics_equal": true
+      },
+      "seconds": 6.61
+    },
+    {
+      "notebook": "npa_MIND",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "9988217f1a38cb77169ce5690faf7c87e745b8eda985e23fb94e0f6255086544",
+      "metrics": {
+        "data_kind": "synthetic",
+        "gpu_count": 0,
+        "group_auc": 0.5781,
+        "mean_mrr": 0.4625,
+        "ndcg@5": 0.597,
+        "ndcg@10": 0.597,
+        "reload_metrics_equal": true
+      },
+      "seconds": 5.71
+    },
+    {
+      "notebook": "nrms_MIND",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "status": "passed",
+      "source_sha256_lf": "068fcf1b7ea9e16839c9b9507a7e646319af3f154f57c2211aa3918e3d6e64b7",
+      "metrics": {
+        "data_kind": "synthetic",
+        "gpu_count": 0,
+        "group_auc": 0.4375,
+        "mean_mrr": 0.399,
+        "ndcg@5": 0.5458,
+        "ndcg@10": 0.5458,
+        "reload_metrics_equal": true
+      },
+      "seconds": 6.04
+    }
+  ],
+  "prepared_fixture_probe": {
+    "input_kind": "synthetic_prepared_fixture",
+    "models_passed": [
+      "dkn_MIND",
+      "lstur_MIND",
+      "naml_MIND",
+      "npa_MIND",
+      "nrms_MIND"
+    ],
+    "files": 24,
+    "content_and_file_set_unchanged": true
+  },
+  "input_contract_tests": {
+    "passed": 4
+  },
+  "unverified": [
+    "real MIND training",
+    "original paper configuration",
+    "new-process checkpoint reload",
+    "GPU",
+    "native Windows"
+  ],
+  "cleanup": {
+    "deleted_file_bytes": 2276006146,
+    "deleted_directories": 7,
+    "final_environment_and_receipts_retained": true
+  },
+  "review": {
+    "mode": "independent AI source-and-receipt review",
+    "material_findings_remaining": 0,
+    "independent_training_rerun": false
+  }
+}
