@@ -20,7 +20,7 @@ information, ratings, and a plaintext review.
     J. McAuley and J. Leskovec, "Hidden factors and hidden topics: understanding rating dimensions with review text", 
     RecSys, 2013.
 
-.. automodule:: recommenders.datasets.amazon_reviews
+.. autoapimodule:: recommenders.datasets.amazon_reviews
     :members:
 
 CORD-19
@@ -44,7 +44,7 @@ to generate new insights in support of the fight against this infectious disease
     Funk, K., Kinney, R., Liu, Z., Merrill, W. and Mooney, P. "Cord-19: The COVID-19 Open Research Dataset.", 2020.
 
 
-.. automodule:: recommenders.datasets.covid_utils
+.. autoapimodule:: recommenders.datasets.covid_utils
     :members:
 
 Criteo
@@ -55,7 +55,7 @@ for millions of display Ads. Every Ad has has 40 attributes, the first attribute
 that the Ad has been clicked on and a 0 represents it wasn't clicked on. The rest consist of 13 integer columns and 
 26 categorical columns.
 
-.. automodule:: recommenders.datasets.criteo
+.. autoapimodule:: recommenders.datasets.criteo
     :members:
 
 MIND
@@ -75,7 +75,7 @@ this impression. To protect user privacy, each user was de-linked from the produ
     and Ming Zhou, "MIND: A Large-scale Dataset for News Recommendation", ACL, 2020.
 
 
-.. automodule:: recommenders.datasets.mind
+.. autoapimodule:: recommenders.datasets.mind
     :members:  
 
 MovieLens
@@ -100,18 +100,18 @@ It comes with several sizes:
     ACM Transactions on Interactive Intelligent Systems (TiiS) 5, 4, Article 19, 
     DOI=http://dx.doi.org/10.1145/2827872, 2015.
 
-.. automodule:: recommenders.datasets.movielens
+.. autoapimodule:: recommenders.datasets.movielens
     :members:
 
 Download utilities 
 ******************
-.. automodule:: recommenders.datasets.download_utils
+.. autoapimodule:: recommenders.datasets.download_utils
     :members:
 
 
 Pandas dataframe utilities
 ***************************
-.. automodule:: recommenders.datasets.pandas_df_utils
+.. autoapimodule:: recommenders.datasets.pandas_df_utils
     :members:
 
 
@@ -119,27 +119,27 @@ Splitter utilities
 ******************
 Python splitters
 ================
-.. automodule:: recommenders.datasets.python_splitters
+.. autoapimodule:: recommenders.datasets.python_splitters
     :members:
 
 PySpark splitters
 =================
-.. automodule:: recommenders.datasets.spark_splitters
+.. autoapimodule:: recommenders.datasets.spark_splitters
     :members:
 
 Other splitters utilities
 =========================
-.. automodule:: recommenders.datasets.split_utils
+.. autoapimodule:: recommenders.datasets.split_utils
     :members:
 
 
 Sparse utilities
 ****************
-.. automodule:: recommenders.datasets.sparse
+.. autoapimodule:: recommenders.datasets.sparse
     :members:
   
 
 Knowledge graph utilities
 *************************
-.. automodule:: recommenders.datasets.wikidata
+.. autoapimodule:: recommenders.datasets.wikidata
     :members:

@@ -6,12 +6,12 @@ Evaluation module
 Python evaluation
 ===============================
 
-.. automodule:: recommenders.evaluation.python_evaluation
+.. autoapimodule:: recommenders.evaluation.python_evaluation
     :members:
 
 PySpark evaluation
 ===============================
 
-.. automodule:: recommenders.evaluation.spark_evaluation
+.. autoapimodule:: recommenders.evaluation.spark_evaluation
     :members:
     :special-members: __init__
