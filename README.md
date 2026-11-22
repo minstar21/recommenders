@@ -17,6 +17,11 @@ Licensed under the MIT License.
 
 ## What's New (May, 2024)
 
+Fork maintenance: [SARPlus local build and offline regression tests](contrib/sarplus/python/README.md#build-and-test-locally)
+now run without the retired sample-data host. API documentation builds with
+`python -m pip install -r docs/requirements-doc.txt` and `jupyter-book build docs`;
+training runtimes are not required to extract API documentation.
+
 We have a new release [Recommenders 1.2.0](https://github.com/recommenders-team/recommenders/releases/tag/1.2.0)!
 
 So many changes since our last release. We have full tests on Python 3.8 to 3.11 (around 1800 tests), upgraded performance in many algorithms, reviewed notebooks, and many more improvements.

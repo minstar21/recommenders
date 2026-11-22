@@ -19,7 +19,7 @@ class BaseModel:
     """Basic class of models
 
     Attributes:
-        hparams (HParams): A HParams object, holds the entire set of hyperparameters.
+        hparams (:class:`~recommenders.models.deeprec.deeprec_utils.HParams`): A HParams object, holds the entire set of hyperparameters.
         train_iterator (object): An iterator to load the data in training steps.
         test_iterator (object): An iterator to load the data in testing steps.
         graph (object): An optional graph.
@@ -36,7 +36,7 @@ class BaseModel:
         parameter set.
 
         Args:
-            hparams (HParams): A HParams object, holds the entire set of hyperparameters.
+            hparams (:class:`~recommenders.models.deeprec.deeprec_utils.HParams`): A HParams object, holds the entire set of hyperparameters.
             iterator_creator (object): An iterator to load the data.
             graph (object): An optional graph.
             seed (int): Random seed.

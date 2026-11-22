@@ -2,6 +2,7 @@
 # Licensed under the MIT License.
 
 import math
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -30,11 +31,12 @@ def spark(tmp_path_factory, app_name="Sample", url="local[*]", memory="1G"):
     """
 
     try:
+        candidates = Path(__file__).parents[2].joinpath("scala", "target").glob(
+            "scala-2.12/sarplus*.jar"
+        )
         sarplus_jar_path = next(
-            Path(__file__)
-            .parents[2]
-            .joinpath("scala", "target")
-            .glob("**/sarplus*.jar")
+            p for p in sorted(candidates)
+            if not any(label in p.name for label in ("-sources", "-javadoc", "bundle"))
         ).absolute()
     except StopIteration:
         raise Exception("Could not find Sarplus JAR file")
@@ -42,6 +44,7 @@ def spark(tmp_path_factory, app_name="Sample", url="local[*]", memory="1G"):
     spark = (
         SparkSession.builder.appName(app_name)
         .master(url)
+        .config("spark.pyspark.python", sys.executable)
         .config("spark.jars", sarplus_jar_path)
         .config("spark.driver.memory", memory)
         .config("spark.sql.shuffle.partitions", "1")
@@ -322,8 +325,7 @@ def test_user_affinity(spark, demo_usage_data, sar_settings, header):
 
     # Set time_now to 60 days later
     user_affinity_ref = (
-        pd.read_csv(sar_settings["FILE_DIR"] + "user_aff_2_months_later.csv")
-        .iloc[:, 1:]
+        pd.read_csv(sar_settings["FILE_DIR"] + "user_aff_2_months_later.csv", index_col=0)
         .squeeze()
     )
     user_affinity_ref = user_affinity_ref[user_affinity_ref > 0]
@@ -342,15 +344,17 @@ def test_user_affinity(spark, demo_usage_data, sar_settings, header):
     df_test = spark.createDataFrame(df_test)
     user_affinity = model.get_user_affinity(df_test).toPandas()
     user_affinity = user_affinity.set_index(header["col_item"])[header["col_rating"]]
-    user_affinity = user_affinity[user_affinity_ref.index]
+    user_affinity = user_affinity.loc[user_affinity_ref.index]
 
     assert np.allclose(user_affinity_ref, user_affinity, atol=sar_settings["ATOL"])
 
 
 # Tests 8-10
 @pytest.mark.parametrize(
-    "threshold,similarity_type,file",
-    [(3, "cooccurrence", "count"), (3, "jaccard", "jac"), (3, "lift", "lift")],
+    "threshold,similarity_type,file,top_k",
+    [(3, "cooccurrence", "count", 10), (3, "jaccard", "jac", 10),
+     (3, "lift", "lift", 10), (3, "cooccurrence", "count", 3),
+     (3, "jaccard", "jac", 2), (3, "lift", "lift", 2)],
 )
 def test_userpred(
     spark,
@@ -358,6 +362,7 @@ def test_userpred(
     threshold,
     similarity_type,
     file,
+    top_k,
     header,
     sar_settings,
     demo_usage_data,
@@ -393,6 +398,8 @@ def test_userpred(
     pred_ref = (
         pd.wide_to_long(pred_ref, ["rec", "score"], "user", "idx")
         .sort_values("score", ascending=False)
+        .head(top_k)
+        .sort_values("rec")
         .reset_index(drop=True)
     )
 
@@ -403,12 +410,13 @@ def test_userpred(
                 demo_usage_data[header["col_user"]] == sar_settings["TEST_USER_ID"]
             ]
         ),
-        top_k=10,
+        top_k=top_k,
         n_user_prediction_partitions=1,
         use_cache=True,
     )
 
-    pred = pred.toPandas().sort_values("score", ascending=False).reset_index(drop=True)
+    # Compare the selected item-score pairs independently of equal-score order.
+    pred = pred.toPandas().sort_values("MovieId").reset_index(drop=True)
 
     assert (pred.MovieId.values == pred_ref.rec.values).all()
     assert np.allclose(
