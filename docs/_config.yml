@@ -40,7 +40,6 @@ html:
   home_page_in_navbar         : false
   use_repository_button       : true
   use_issues_button           : true
-  baseurl                     : https://recommenders-team.github.io/recommenders/
 
 sphinx:
   extra_extensions:
@@ -49,7 +48,10 @@ sphinx:
   - sphinx.ext.intersphinx
   - sphinx.ext.ifconfig
   - sphinx.ext.napoleon       # To render Google format docstrings
-  - sphinx.ext.viewcode       # Add links to highlighted source code
+  - autoapi.extension        # Extract API docs without importing training runtimes
+  config:
+    autoapi_dirs: ["../recommenders"]
+    autoapi_generate_api_docs: false
 
 
 

@@ -6,57 +6,57 @@ Common utilities module
 
 General utilities
 ===============================
-.. automodule:: recommenders.utils.general_utils
+.. autoapimodule:: recommenders.utils.general_utils
     :members:
 
 
 GPU utilities
 ===============================
-.. automodule:: recommenders.utils.gpu_utils
+.. autoapimodule:: recommenders.utils.gpu_utils
     :members:
 
 
 Kubernetes utilities
 ===============================
-.. automodule:: recommenders.utils.k8s_utils
+.. autoapimodule:: recommenders.utils.k8s_utils
     :members:
 
 
 Notebook utilities
 ===============================
-.. automodule:: recommenders.utils.notebook_utils
+.. autoapimodule:: recommenders.utils.notebook_utils
     :members:
-.. automodule:: recommenders.utils.notebook_memory_management
+.. autoapimodule:: recommenders.utils.notebook_memory_management
     :members:
 
 
 Python utilities
 ===============================
-.. automodule:: recommenders.utils.python_utils
+.. autoapimodule:: recommenders.utils.python_utils
     :members:
 
 
 Spark utilities
 ===============================
-.. automodule:: recommenders.utils.spark_utils
+.. autoapimodule:: recommenders.utils.spark_utils
     :members:
 
 
 Tensorflow utilities
 ===============================
-.. automodule:: recommenders.utils.tf_utils
+.. autoapimodule:: recommenders.utils.tf_utils
     :members:
     :special-members: __init__
 
 
 Timer
 ===============================
-.. automodule:: recommenders.utils.timer
+.. autoapimodule:: recommenders.utils.timer
     :members:
     :special-members: __init__
 
 
 Plot utilities
 ===============================
-.. automodule:: recommenders.utils.plot
+.. autoapimodule:: recommenders.utils.plot
     :members:

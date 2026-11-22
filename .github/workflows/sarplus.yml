@@ -22,8 +22,9 @@ on:
     paths:
       - contrib/sarplus/python/**
       - contrib/sarplus/scala/**
+      - '!contrib/sarplus/**/*.md'
+      - contrib/sarplus/python/README.md
       - contrib/sarplus/VERSION
-      - .github/workflows/sarplus.yml
   
   # Enable manual trigger
   workflow_dispatch:
@@ -145,8 +146,6 @@ jobs:
       - name: Package
         # Generate jar files for Spark below 3.2 and above 3.2
         if: github.ref == 'refs/heads/main' && matrix.spark-version != '3.0.1'
-        env:
-          GPG_KEY: ${{ secrets.SARPLUS_GPG_PRI_KEY_ASC }}
         run: |
           SARPLUS_VERSION=$(cat "${SARPLUS_ROOT}/VERSION")
 
@@ -155,34 +154,40 @@ jobs:
           export SPARK_VERSION='${{ matrix.spark-version }}'
           export HADOOP_VERSION='${{ matrix.hadoop-version }}'
           export SCALA_VERSION='${{ matrix.scala-version }}'
-          sbt ++${SCALA_VERSION}! package
-          sbt ++${SCALA_VERSION}! packageDoc
-          sbt ++${SCALA_VERSION}! packageSrc
-          sbt ++${SCALA_VERSION}! makePom
+          sbt "++${SCALA_VERSION}!" package packageDoc packageSrc makePom
+          echo "sarplus_version=${SARPLUS_VERSION}" >> "$GITHUB_ENV"
 
-          # sign with GPG
+      - name: Bundle Scala artifacts
+        if: github.ref == 'refs/heads/main' && matrix.spark-version != '3.0.1'
+        env:
+          GPG_KEY: ${{ secrets.SARPLUS_GPG_PRI_KEY_ASC }}
+          SPARK_VERSION: ${{ matrix.spark-version }}
+        run: |
           cd "${SCALA_ROOT}/target/scala-2.12"
-          gpg --import <(cat <<< "${GPG_KEY}")
-          for file in {*.jar,*.pom}; do gpg -ab "${file}"; done
-
-          # bundle
-          [ '${{ matrix.spark-version }}' == '3.1.2' ] \
-            && jar cvf sarplus-${SARPLUS_VERSION}-bundle_2.12-spark-${SPARK_VERSION}.jar \
-                       sarplus_*.jar \
-                       sarplus_*.pom \
-                       sarplus_*.asc
-          [ '${{ matrix.spark-version }}' == '3.2.1' ] \
-            && jar cvf sarplus-spark-3.2-plus-bundle_2.12-${SARPLUS_VERSION}.jar \
-                       sarplus-spark*.jar \
-                       sarplus-spark*.pom \
-                       sarplus-spark*.asc
-
-          # set sarplus_version for the artifact upload step
-          echo "sarplus_version=${SARPLUS_VERSION}" >> $GITHUB_ENV
+          files=(sarplus*.pom)
+          [[ ${#files[@]} == 1 && -f ${files[0]} ]]
+          stem=${files[0]%.pom}
+          files+=("$stem.jar" "$stem-sources.jar" "$stem-javadoc.jar")
+          for file in "${files[@]}"; do test -s "$file"; done
+          test -n "$GPG_KEY" || { echo "SARPLUS_GPG_PRI_KEY_ASC is required for release artifacts" >&2; exit 1; }
+          gpg --batch --import <<< "$GPG_KEY"
+          gpg --batch --list-secret-keys --with-colons | grep -q '^sec:'
+          for file in "${files[@]}"; do
+            gpg --batch --armor --detach-sign --output "$file.asc" "$file"
+          done
+          signed_files=("${files[@]}" "${files[@]/%/.asc}")
+          if [[ "$SPARK_VERSION" == '3.2.1' ]]; then
+            bundle="sarplus-spark-3.2-plus-bundle_2.12-${sarplus_version}.jar"
+          else
+            bundle="sarplus-${sarplus_version}-bundle_2.12-spark-${SPARK_VERSION}.jar"
+          fi
+          jar cf "$bundle" "${signed_files[@]}"
+          echo "sarplus_bundle=$bundle" >> "$GITHUB_ENV"
 
       - name: Upload Scala bundle as GitHub artifact when merged into main
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && matrix.spark-version != '3.0.1'
         uses: actions/upload-artifact@v4
         with:
-          name: sarplus-${{ env.sarplus_version }}-bundle_2.12-spark-${{ matrix.spark-version }}-jar
-          path: ${{ env.SCALA_ROOT }}/target/scala-2.12/*bundle*.jar
+          name: ${{ env.sarplus_bundle }}
+          path: ${{ env.SCALA_ROOT }}/target/scala-2.12/${{ env.sarplus_bundle }}
+          if-no-files-found: error
